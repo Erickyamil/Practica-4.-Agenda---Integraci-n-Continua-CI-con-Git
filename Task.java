@@ -14,7 +14,7 @@ public class Task {
     @Override
     public String toString() {
         String statusLabel = finished ? "Completado" : "Incompleto";
-        String icon = finished ? "[✔]" : "[ ]";
+        String icon = finished ? "[X]" : "[ ]";
         return String.format("%-20s %s (%s)", description, icon, statusLabel);
     }
 }

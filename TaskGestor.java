@@ -25,14 +25,24 @@ public class TaskGestor {
         return false;
     }
 
+    // Nuevo método para marcar como completada
+    public boolean completeTask(int index) {
+        if (index >= 0 && index < list.size()) {
+            list.get(index).setFinished(true);
+            return true;
+        }
+        return false;
+    }
+
     public void saveToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (Task task : list) {
+                // Guardamos descripción y estado separados por |
                 writer.write(task.getDescription() + "|" + task.isFinished());
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Error al guardar las tareas: " + e.getMessage());
+            System.out.println("Error al guardar: " + e.getMessage());
         }
     }
 
@@ -51,7 +61,7 @@ public class TaskGestor {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error al cargar las tareas: " + e.getMessage());
+            System.out.println("Error al cargar: " + e.getMessage());
         }
     }
 }
