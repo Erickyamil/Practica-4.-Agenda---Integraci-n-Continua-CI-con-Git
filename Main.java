@@ -53,11 +53,13 @@ public class Main {
                         }
                     }
                 }
-                case 4 -> System.out.println("Saliendo...");
+                case 4 -> {
+                    gestor.saveToFile();
+                    System.out.println("Tareas guardadas. Saliendo...");
+                }
                 default -> System.out.println("Opción inválida.");
             }
         } while (option != 4);
-        
         input.close();
     }
 }
