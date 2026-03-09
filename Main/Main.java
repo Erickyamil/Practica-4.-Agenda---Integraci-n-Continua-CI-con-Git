@@ -1,4 +1,7 @@
+package Main;
 import java.util.Scanner;
+
+import Test.AgendaTest;
 
 public class Main {
     public static void main(String[] args) {
@@ -6,6 +9,7 @@ public class Main {
         System.out.println("-- GESTOR DE TAREAS --\n"); 
         
         TaskGestor gestor = new TaskGestor();
+        String ultimaEntrada = "";
         int option = 0;
 
         do {
@@ -14,7 +18,8 @@ public class Main {
             System.out.println("2. Listar tareas");
             System.out.println("3. Marcar tarea como completada");
             System.out.println("4. Eliminar tarea");
-            System.out.println("5. Salir");
+            System.out.println("5. Ejecutar auto-diagnostico");
+            System.out.println("6. Salir");
             System.out.print("> ");
             
             if (!input.hasNextInt()) {
@@ -27,7 +32,8 @@ public class Main {
             switch(option) {
                 case 1 -> {
                     System.out.print("Descripción de la tarea: ");
-                    gestor.add(input.nextLine());
+                    ultimaEntrada = input.nextLine(); // Guardamos la entrada real
+                    gestor.add(ultimaEntrada); // La añadimos al gestor
                     System.out.println("¡Tarea guardada!");
                 }
                 case 2 -> {
@@ -59,12 +65,19 @@ public class Main {
                     }
                 }
                 case 5 -> {
-                    gestor.saveToFile();
-                    System.out.println("Datos guardados. Saliendo...");
+                    if (ultimaEntrada.isEmpty()) {
+                        System.out.println("No se ha añadido ninguna tarea en esta sesión para validar.");
+                    } else {
+                        System.out.println("\n--- VALIDANDO ÚLTIMA ENTRADA REAL ---");
+                        AgendaTest.verificarUltimaTarea(ultimaEntrada, gestor);
+                    }
+                }
+                case 6 -> {
+                    System.out.println("Saliendo...");
                 }
                 default -> System.out.println("Opción inválida.");
             }
-        } while (option != 5);
+        } while (option != 6);
         
         input.close();
     }
