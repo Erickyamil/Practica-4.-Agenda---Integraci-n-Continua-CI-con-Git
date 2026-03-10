@@ -15,7 +15,6 @@ public class Main {
         this.ultimaEntrada = "";
     }
     
-    // Este es el método que faltaba - ¡aquí está la lógica principal!
     public void ejecutar() {
         int option = 0;
         do {
@@ -46,7 +45,7 @@ public class Main {
     }
     
     private void procesarOpcion(int option) {
-        input.nextLine(); // Consumir salto de línea
+        input.nextLine();
         
         switch(option) {
             case 1:
@@ -123,6 +122,6 @@ public class Main {
     
     public static void main(String[] args) {
         Main app = new Main();
-        app.ejecutar();  // ¡Ahora sí existe el método!
+        app.ejecutar(); 
     }
 }

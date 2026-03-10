@@ -26,7 +26,6 @@ public class TaskGestor {
         return false;
     }
 
-    // Nuevo método para marcar como completada
     public boolean completeTask(int index) {
         if (index >= 0 && index < list.size()) {
             list.get(index).setFinished(true);
