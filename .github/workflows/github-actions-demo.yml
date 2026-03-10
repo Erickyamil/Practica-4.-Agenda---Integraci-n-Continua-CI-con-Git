@@ -1,19 +1,35 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Agenda Test
 on: [push]
-jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v5
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
 
+env:
+  USER_NAME: "E. Yamil"
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      # Configuración del entorno: Instalar el Java Development Kit (JDK)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # Uso de la variable de entorno para el registro (log)
+      - name: Log de inicio
+        run: echo "Iniciando pruebas de la agenda de $USER_NAME"
+
+      # Compilación y prueba: Asegura que los cambios no rompan funciones existentes
+      - name: Compilar el proyecto
+        run: |
+          mkdir -p bin
+          javac -cp "lib/*" -d bin Main/*.java Test/*.java
+
+      - name: Ejecutar pruebas de JUnit
+        # Se utiliza el console-standalone de JUnit que existe en la carpeta lib
+        run: |
+          java -jar lib/junit-platform-console-standalone.jar --class-path bin --scan-class-path
