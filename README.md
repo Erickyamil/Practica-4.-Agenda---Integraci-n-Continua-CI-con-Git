@@ -1,62 +1,47 @@
-Gestión de Tareas - Agenda (CI/CD con GitHub Actions)
+## Gestión de Tareas - Agenda (CI/CD con GitHub Actions)
 Este proyecto es una aplicación de consola desarrollada en Java para la gestión de tareas pendientes. Está diseñado bajo principios de programación orientada a objetos y cuenta con un flujo de trabajo automatizado para garantizar la integridad del código mediante Integración Continua (CI).
 
-🚀 Características
+# Características
 Operaciones CRUD: Permite añadir, listar, completar y eliminar tareas.
-
 Persistencia de Datos: Las tareas se guardan automáticamente en un archivo local (tareas.txt) para que la información no se pierda al cerrar el programa.
-
 Capa de Servicio: Implementa un TaskService para separar la lógica de negocio de la gestión de datos, facilitando las pruebas unitarias.
-
 Pruebas Automatizadas: Incluye tests unitarios con JUnit 5 para verificar que las funciones principales trabajen correctamente.
-
 Integración Continua: Configurado con GitHub Actions para compilar y testear el código automáticamente en cada actualización.
 
-📂 Estructura del Proyecto
-Plaintext
-├── .github/workflows/
-│   └── agenda-automation.yml  # Configuración del flujo de CI
-├── lib/
-│   └── junit-platform-console-standalone.jar # Ejecutable para pruebas
-├── Main/
-│   ├── Task.java             # Modelo de datos de la tarea
-│   ├── TaskGestor.java       # Manejo de la persistencia y lista
-│   ├── TaskService.java      # Lógica de negocio (interfaz)
-│   └── Main.java             # Interfaz de usuario por consola
-├── Test/
-│   ├── AgendaTest.java       # Pruebas de integración manuales
-│   └── TaskServiceTest.java  # Pruebas unitarias automáticas (JUnit)
-└── README.md
-🛠️ Automatización (GitHub Actions)
+# Estructura del Proyecto
+
+<img width="887" height="328" alt="Captura de pantalla 2026-03-09 231847" src="https://github.com/user-attachments/assets/4d4eb70e-9291-4045-8af6-f08d9661c6d4" />
+
+# Automatización (GitHub Actions)
 El archivo agenda-automation.yml asegura que el proyecto cumpla con los estándares de calidad antes de cada integración:
 
 Entorno: Configura un corredor con Ubuntu y el JDK 17.
-
 Variables: Utiliza la variable de entorno USER_NAME para personalizar los registros de ejecución.
-
 Compilación: Compila todas las clases incluyendo las bibliotecas de JUnit ubicadas en /lib.
-
 Pruebas: Ejecuta automáticamente los tests unitarios. Si alguna prueba falla, el flujo de trabajo se detendrá y notificará el error.
 
-💻 Instalación y Uso
-Prerrequisitos
-Java JDK 17 o superior instalado.
+# Instalación y Uso
+Prerrequisitos: Java JDK 17 o superior instalado.
 
-Ejecución Local
+# Ejecución Local
 Clona el repositorio.
 
-Compila el proyecto:
-
-Bash
+```bash
 javac -d bin Main/*.java
+```
+
 Ejecuta la aplicación:
 
-Bash
+```bash
 java -cp bin Main.Main
-Ejecutar Pruebas Manualmente
+```
+
+# Ejecutar Pruebas Manualmente
 Para ejecutar los tests de JUnit desde la terminal:
 
-Bash
+```bash
 java -jar lib/junit-platform-console-standalone.jar --class-path bin --scan-class-path
-📝 Notas de Desarrollo
+```
+
+# Nota
 El proyecto utiliza un sistema de persistencia basado en archivos de texto, donde cada tarea se almacena con su descripción y estado de finalización. El archivo .gitignore está configurado para excluir archivos temporales de IDEs y el archivo de datos local para mantener el repositorio limpio.
